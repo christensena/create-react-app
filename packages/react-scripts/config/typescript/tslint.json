@@ -1,0 +1,28 @@
+{
+    "extends": [
+        "tslint-react",
+        "tslint:latest"
+    ],
+    "rules": {
+        "jsx-alignment": true,
+        "jsx-no-lambda": true,
+        "jsx-no-string-ref": true,
+        "jsx-no-multiline-js": true,
+        "jsx-self-close": true,
+        "member-access": false,
+        "no-any": false,
+        "no-for-in-array": false,
+        "no-unused-variable": [true, "react"],
+        "restrict-plus-operands": false,
+        "quotemark": [
+            true,
+            "single",
+            "jsx-double",
+            "avoid-escape"
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords"
+        ]
+    }
+}

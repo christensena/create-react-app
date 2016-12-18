@@ -22,7 +22,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
   // TODO: I don't know if it's safe or not to just use / as path separator
   // in Jest configs. We need help from somebody with Windows to determine this.
   const config = {
-    collectCoverageFrom: ['src/**/*.{js,jsx}'],
+    collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
     setupFiles: [resolve('config/polyfills.js')],
     setupTestFrameworkScriptFile: setupTestsFile,
     testPathIgnorePatterns: [
@@ -34,15 +34,25 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^.+\\.(js|jsx)$': isEjecting ?
         '<rootDir>/node_modules/babel-jest'
         : resolve('config/jest/babelTransform.js'),
+      '^.+\\.(ts|tsx)$': isEjecting ?
+        '<rootDir>/node_modules/ts-jest/preprocessor.js'
+        : resolve('config/jest/tsTransform.js'),
       '^.+\\.css$': resolve('config/jest/cssTransform.js'),
-      '^(?!.*\\.(js|jsx|css|json)$)': resolve('config/jest/fileTransform.js'),
+      '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve('config/jest/fileTransform.js'),
     },
     transformIgnorePatterns: [
-      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'
+      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$'
     ],
     moduleNameMapper: {
-      '^react-native$': 'react-native-web'
-    }
+      '^react-native$': 'react-native-web',
+    },
+    testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$',
+    moduleFileExtensions: [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ]
   };
   if (rootDir) {
     config.rootDir = rootDir;
