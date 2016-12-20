@@ -1,9 +1,10 @@
 {
-  "name": "react-scripts",
+  "name": "@christensena/react-scripts",
   "version": "0.9.4",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebookincubator/create-react-app",
+  "description": "Fork of create-react-app with unobtrusive typescript support.",
+  "repository": "christensena/create-react-app",
   "license": "BSD-3-Clause",
+  "private": false,
   "engines": {
     "node": ">=4"
   },
