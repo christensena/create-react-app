@@ -23,6 +23,14 @@
         "variable-name": [
             true,
             "ban-keywords"
-        ]
+        ],
+        "object-literal-sort-keys": false,
+        "linebreak-style": [
+            false
+        ],
+        "ordered-imports": [
+            false
+        ],
+        "no-default-export": false
     }
 }
