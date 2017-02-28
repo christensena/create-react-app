@@ -1,5 +1,5 @@
 {
     "extends": [
-        "./node_modules/@christensena/react-scripts/config/typescript/tslint.json"
+        "./node_modules/react-scripts/config/typescript/tslint.json"
     ]
 }

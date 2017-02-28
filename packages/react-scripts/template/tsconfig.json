@@ -1,5 +1,5 @@
 {
-    "extends": "./node_modules/@christensena/react-scripts/config/typescript/tsconfig.json",
+    "extends": "./node_modules/react-scripts/config/typescript/tsconfig.json",
     "exclude": [
         "node_modules/**/*"
     ]
