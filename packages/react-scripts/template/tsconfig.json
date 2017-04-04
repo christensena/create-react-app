@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
-        "forceConsistentCasingInFileNames": true,
         "jsx": "react",
-        "module": "commonjs",
+        "module": "es6",
+        "target": "es6",
         "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
         "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
@@ -13,7 +14,6 @@
         "noUnusedParameters": true,
         "strictNullChecks": true,
         "sourceMap": true,
-        "target": "es5",
         "lib": [
             "dom",
             "es5",

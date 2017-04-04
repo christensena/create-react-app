@@ -137,7 +137,8 @@ module.exports = {
           /\.(ts|tsx)$/,
           /\.css$/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.less$/
         ],
         loader: 'url',
         query: {
@@ -147,7 +148,7 @@ module.exports = {
       },
       // Process JS with Babel.
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         include: paths.appSrc,
         loader: 'babel',
         // @remove-on-eject-begin
@@ -161,7 +162,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
-        loader: 'awesome-typescript',
+        loader: 'ts',
         query: {
           configFileName: 'tsconfig.build.json'
         }
@@ -200,7 +201,12 @@ module.exports = {
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      // Parse less files and modify variables
+      {
+        test: /\.less$/,
+        loader: 'style!css!postcss!less?{modifyVars:{"@primary-color":"#1DA57A"}}'
+      },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]

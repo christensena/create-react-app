@@ -80,7 +80,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
       verbose && '--verbose'
     ].filter(function(e) { return e; });
   }
-  args.push('react', 'react-dom');
+  args.push('react', 'react-dom', 'antd');
 
   // Install additional template dependencies, if present
   var templateDependenciesPath = path.join(appPath, '.template.dependencies.json');
