@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "autoprefixer": "6.7.2",
-    "awesome-typescript-loader": "^3.1.2",
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
     "babel-jest": "18.0.0",
@@ -60,6 +59,7 @@
     "promise": "7.1.1",
     "react-dev-utils": "^0.5.2",
     "style-loader": "0.13.2",
+    "ts-loader": "^2.0.3",
     "tslint": "^4.1.1",
     "tslint-loader": "^3.3.0",
     "tslint-react": "^2.2.0",

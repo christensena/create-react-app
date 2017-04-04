@@ -171,7 +171,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
-        loader: 'awesome-typescript',
+        loader: 'ts',
         query: {
           configFileName: 'tsconfig.build.json'
         }
