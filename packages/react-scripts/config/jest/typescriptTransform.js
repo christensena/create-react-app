@@ -5,12 +5,18 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const tsc = require('typescript');
+const babelTransform = require('./babelTransform');
 const tsconfigPath = require('app-root-path').resolve('/tsconfig.json');
 const THIS_FILE = fs.readFileSync(__filename);
 
 let compilerConfig = {
-  module: tsc.ModuleKind.CommonJS,
-  jsx: tsc.JsxEmit.React,
+  module: tsc.ModuleKind.ES6,
+  target: tsc.ScriptTarget.ES6,
+  moduleResolution: tsc.ModuleResolutionKind.Node,
+  allowSyntheticDefaultImports: true,
+  jsx: tsc.JsxEmit.Preserve,
+  sourceMap: true,
+  outDir: './dist/',
 };
 
 if (fs.existsSync(tsconfigPath)) {
@@ -18,7 +24,7 @@ if (fs.existsSync(tsconfigPath)) {
     const tsconfig = tsc.readConfigFile(tsconfigPath).config;
 
     if (tsconfig && tsconfig.compilerOptions) {
-      compilerConfig = tsconfig.compilerOptions;
+      compilerOptions = tsconfig.compilerOptions;
     }
   } catch (e) {
     /* Do nothing - default is set */
@@ -27,7 +33,10 @@ if (fs.existsSync(tsconfigPath)) {
 
 module.exports = {
   process(src, path, config, options) {
-    if (path.endsWith('.ts') || path.endsWith('.tsx')) {
+    const isTs = path.endsWith('.ts');
+    const isTsx = path.endsWith('.tsx');
+
+    if (isTs || isTsx) {
       let compilerOptions = compilerConfig;
       if (options.instrument) {
         // inline source with source map for remapping coverage
@@ -38,13 +47,21 @@ module.exports = {
         // fix broken paths in coverage report if `.outDir` is set
         delete compilerOptions.outDir;
       }
-
-      const tsTranspiled = tsc.transpileModule(src, {
-        compilerOptions: compilerOptions,
+      src = tsc.transpileModule(src, {
+        compilerOptions,
         fileName: path,
       });
-      return tsTranspiled.outputText;
+      src = src.outputText;
+
+      // update the path so babel can try and process the output
+      path = path.substr(0, path.lastIndexOf('.')) + (isTs ? '.js' : '.jsx') ||
+        path;
     }
+
+    if (path.endsWith('.js') || path.endsWith('.jsx')) {
+      src = babelTransform.process(src, path);
+    }
+
     return src;
   },
   getCacheKey(fileData, filePath, configStr, options) {

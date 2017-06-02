@@ -190,6 +190,7 @@ module.exports = {
         options: {
           plugins: [['import', [{ libraryName: 'antd', style: true }]]],
           // @remove-on-eject-begin
+          presets: [require.resolve('babel-preset-react-app')],
           babelrc: false,
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
